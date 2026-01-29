@@ -1,0 +1,100 @@
+/* General body and map styles */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Title styling */
+#title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 20px;
+    margin-left: 20px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25pt;
+    color: white;
+    z-index: 1;
+}
+
+#subtitle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 70px;
+    margin-left: 20px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15pt;
+    color: white;
+    z-index: 1;
+}
+
+/* Legend panel styling */
+#legend {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 160px;
+    background: #fff;
+    margin-right: 20px;
+    margin-bottom: 40px;
+    padding: 10px 20px 10px 10px;
+    border-radius: 3px;
+    text-align: left;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 11pt;
+    z-index: 1;
+}
+
+/* Legend items for choropleth map */
+#legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
+/* Proportional symbol legend styles */
+.break {
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+}
+
+.dot {
+    display: inline-block;
+    margin-top: 5px;
+    border-radius: 50%;
+    opacity: 0.7;
+}
+
+.dot-label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-style: italic;
+}
+
+/* Hyperlink styling */
+a {
+    color: black;
+}
+
+/* Popup styling */
+.mapboxgl-popup-content {
+    font-family: 'Open Sans', sans-serif;
+    padding: 10px;
+    max-width: 200px;
+}
+
+.mapboxgl-popup-content strong {
+    font-weight: bold;
+}
