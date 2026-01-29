@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID-19 US Visualization Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 60px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2d3748;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: #718096;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+        }
+
+        .description {
+            color: #4a5568;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .maps-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .map-card {
+            background: #f7fafc;
+            border-radius: 15px;
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid #e2e8f0;
+        }
+
+        .map-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+
+        .map-card h2 {
+            color: #2d3748;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .map-card p {
+            color: #718096;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .map-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .map-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .info-section {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .info-section h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .info-section p {
+            color: #718096;
+            line-height: 1.6;
+        }
+
+        .info-section a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .info-section a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .maps-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🗺️ COVID-19 US Visualization</h1>
+        <p class="subtitle">Interactive Maps of COVID-19 Data (2020)</p>
+        
+        <div class="description">
+            <p>
+                This project presents two interactive web maps visualizing COVID-19 data across 
+                the United States for the year 2020. Explore the spread and intensity of COVID-19 
+                cases at the county level through choropleth and proportional symbol maps.
+            </p>
+        </div>
+
+        <div class="maps-container">
+            <div class="map-card">
+                <h2>📊 Map 1: Rates</h2>
+                <p>
+                    Choropleth map showing COVID-19 case rates per 1,000 residents. 
+                    Darker colors indicate higher infection rates.
+                </p>
+                <a href="map1.html" class="map-link">View Choropleth Map</a>
+            </div>
+
+            <div class="map-card">
+                <h2>🔴 Map 2: Cases</h2>
+                <p>
+                    Proportional symbols map displaying total COVID-19 cases. 
+                    Larger circles represent counties with more cases.
+                </p>
+                <a href="map2.html" class="map-link">View Proportional Map</a>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>About This Project</h3>
+            <p>
+                Created as part of GEOG 458 Lab 3 at the University of Washington. 
+                Data sourced from <a href="https://github.com/nytimes/covid-19-data" target="_blank">The New York Times</a> 
+                and the U.S. Census Bureau.
+            </p>
+            <p style="margin-top: 10px;">
+                <a href="https://github.com/cyoo37-eng/cyoo37-lab3" target="_blank">View on GitHub →</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
