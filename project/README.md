@@ -144,5 +144,3 @@ covid-19-map-visualization/
 **Instructor:** Bo Zhao
 
 ---
-
-*For questions or issues, please open an issue in this repository.*
