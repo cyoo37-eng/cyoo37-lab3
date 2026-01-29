@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>COVID-19 Rates in the US</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+
+<body>
+    <div id="map"></div>
+    <div id="title">
+        COVID-19 Rates in the US
+    </div>
+    <div id="subtitle">
+        (2020)
+    </div>
+    <div id="legend"></div>
+    
+    <script>
+        // TODO: Replace with your own Mapbox access token
+        mapboxgl.accessToken = 'pk.eyJ1IjoiY3lvbzM3IiwiYSI6ImNta3oxcTRodzBlYm4zY3BzcW12b2k1MTAifQ.rJIiNrA1UOOb-qolJvwlAg';
+        
+        let map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/light-v10', // Light basemap for choropleth
+            zoom: 3.5,
+            center: [-98, 38.5], // Center of US
+            projection: 'albers' // Albers projection as required
+        });
+
+        // Load GeoJSON data and add choropleth layer
+        map.on('load', () => {
+            map.addSource('covid-rates', {
+                type: 'geojson',
+                data: 'assets/us-covid-2020-rates.geojson'
+            });
+
+            // Define color grades for choropleth
+            const grades = [0, 10, 20, 50, 100];
+            const colors = ['#FFEDA0', '#FED976', '#FEB24C', '#FD8D3C', '#FC4E2A', '#E31A1C'];
+
+            map.addLayer({
+                'id': 'covid-rates-layer',
+                'type': 'fill',
+                'source': 'covid-rates',
+                'paint': {
+                    'fill-color': [
+                        'step',
+                        ['get', 'rates'],
+                        colors[0],
+                        grades[1], colors[1],
+                        grades[2], colors[2],
+                        grades[3], colors[3],
+                        grades[4], colors[4],
+                      
+                    ],
+                    'fill-outline-color': '#BBBBBB',
+                    'fill-opacity': 0.7
+                }
+            });
+
+            // Add click event for popup
+            map.on('click', 'covid-rates-layer', (e) => {
+                const county = e.features[0].properties.county || 'Unknown';
+                const state = e.features[0].properties.state || 'Unknown';
+                const rate = e.features[0].properties.rates;
+                
+                new mapboxgl.Popup()
+                    .setLngLat(e.lngLat)
+                    .setHTML(`<strong>${county}, ${state}</strong><br>Rate: ${rate} per 1,000 residents`)
+                    .addTo(map);
+            });
+
+            // Change cursor on hover
+            map.on('mouseenter', 'covid-rates-layer', () => {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            map.on('mouseleave', 'covid-rates-layer', () => {
+                map.getCanvas().style.cursor = '';
+            });
+
+            // Create legend
+            const legend = document.getElementById('legend');
+            const labels = ['<strong>Cases per 1,000</strong>'];
+            
+            for (let i = 0; i < grades.length; i++) {
+                const from = grades[i];
+                const to = grades[i + 1];
+                
+                labels.push(
+                    '<i style="background:' + colors[i] + '"></i> ' +
+                    from + (to ? '&ndash;' + to : '+')
+                );
+            }
+            
+            const source = '<p style="text-align: right; font-size:10pt">Source: <a href="https://github.com/nytimes/covid-19-data">NY Times</a></p>';
+            legend.innerHTML = labels.join('<br>') + source;
+        });
+    </script>
+</body>
+</html>
